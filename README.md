@@ -152,48 +152,7 @@ Database/
 
 The database uses fictional/demo data for learning and portfolio purposes.
 
-Project Structure
-TransportationManagementSystem/
-│
-├── Controllers/
-│   ├── LoginController.cs
-│   ├── AssignmentController.cs
-│   ├── EmergencyRequestController.cs
-│   ├── EmergencyRequestsController.cs
-│   ├── NotificationController.cs
-│   └── ...
-│
-├── Models/
-│   ├── User.cs
-│   ├── Driver.cs
-│   ├── Vehicle.cs
-│   ├── Trip.cs
-│   ├── Assignment.cs
-│   ├── EmergencyRequest.cs
-│   ├── Notification.cs
-│   └── ...
-│
-├── Data/
-│   └── TransportationDbContext.cs
-│
-├── Views/
-│   ├── Login/
-│   ├── Nurse/
-│   ├── Assignment/
-│   ├── Manager/
-│   └── ...
-│
-├── wwwroot/
-│   ├── css/
-│   
-│  
-│
-├── Database/
-│   └── TransportationDB.sql
-│
-├── Program.cs
-├── appsettings.json
-└── TransportationManagementSystem.csproj
+
 
 What I Learned
 
