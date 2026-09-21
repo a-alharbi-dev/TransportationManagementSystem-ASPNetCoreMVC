@@ -85,24 +85,9 @@ This experience allowed me to expand my role from primarily frontend development
 - LINQ queries.
 
 ---
-
 ## MVC Architecture
+The project follows the **Model-View-Controller (MVC)** architecture, where each layer has a specific responsibility:
 
-The project follows the **Model-View-Controller (MVC)** architecture.
-
-```text
-                    Transportation Management System
-                               |
-             ---------------------------------------
-             |                  |                  |
-          Model             Controller            View
-             |                  |                  |
-      Application Data    Business Logic       User Interface
-             |                  |                  |
-             -------- Entity Framework Core -------
-                              |
-                         SQL Server
----
 
 Model
 
