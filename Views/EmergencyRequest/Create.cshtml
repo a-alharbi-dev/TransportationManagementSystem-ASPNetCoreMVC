@@ -1,0 +1,867 @@
+﻿@{
+    ViewData["Title"] = "Emergency Request";
+    Layout = null;
+
+}
+
+
+<!-- abrar alharbi -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Transportation Management System
+    </title>
+
+    <link href="~/css/styleA.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+                    HEADER
+=========================================== -->
+
+<header class="app-header">
+
+
+    <div class="header-top">
+
+        <div class="container header-top-inner">
+
+            <span>
+                King Fahd Armed Forces Hospital in Jeddah
+            </span>
+
+            <span>
+                Transportation Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="container header-main-inner">
+
+
+        <!-- Brand -->
+
+        <div class="brand">
+
+   
+
+
+            <div>
+
+                <h1 class="brand-title">
+
+                    Transportation Management
+
+                </h1>
+
+
+                <p class="brand-subtitle">
+
+                    Transportation Services Platform
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="main-nav">
+
+
+
+
+            <a href="/EmergencyRequest/Create"
+               class="nav-link active">
+
+                Emergency Request
+
+            </a>
+
+
+            <a href="/Notification/Index"
+               class="nav-link">
+
+                Notifications
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- Actions -->
+
+        <div class="header-actions">
+
+
+            <!-- User -->
+
+            <div class="profile-dropdown">
+
+
+                <button class="manager-chip"
+                        id="profileBtn">
+
+                    <span>A</span>
+
+                    <div>
+
+                        <strong>Abrar Alharbi</strong>
+
+                        <br>
+
+                        <small>nurse</small>
+
+                    </div>
+
+                </button>
+
+
+                <div class="profile-menu"
+                     id="profileMenu">
+
+
+    
+
+
+                    <button class="menu-item"
+                            id="logoutBtn">
+
+                        Sign Out
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+
+
+<!-- ==========================================
+                    MAIN
+=========================================== -->
+
+<main>
+
+
+    <div class="container">
+
+
+        <!-- ==========================================
+            EMERGENCY REQUEST FORM
+        =========================================== -->
+
+        <section class="section">
+
+
+            <div class="card">
+
+
+                <!-- Card Header -->
+
+                <div class="card-header">
+
+
+                    <div>
+
+                        <h3 class="card-title">
+
+                            Emergency Request
+
+                        </h3>
+
+
+                        <p class="section-subtitle">
+
+                            Fill in the required information and submit your request.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- Card Body -->
+
+                <div class="card-body">
+
+
+                    <!-- ==========================================
+                            MVC FORM
+                    =========================================== -->
+
+                    <form asp-controller="EmergencyRequest"
+                          asp-action="Create"
+                          method="post"
+                          class="form-grid">
+
+                        @Html.AntiForgeryToken()
+
+
+                        <!-- ==========================================
+                                ERROR MESSAGE
+                        =========================================== -->
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="form-group full">
+
+                                <div style="
+                                    padding:12px 16px;
+                                    border-radius:8px;
+                                    background:#f8d7da;
+                                    color:#842029;
+                                    border:1px solid #f5c2c7;
+                                ">
+
+                                    @ViewBag.Error
+
+                                </div>
+
+                            </div>
+                        }
+
+
+                        <!-- ==========================================
+                                SUCCESS MESSAGE
+                        =========================================== -->
+
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="form-group full">
+
+                                <div style="
+                                    padding:12px 16px;
+                                    border-radius:8px;
+                                    background:#d1e7dd;
+                                    color:#0f5132;
+                                    border:1px solid #badbcc;
+                                ">
+
+                                    @TempData["SuccessMessage"]
+
+                                </div>
+
+                            </div>
+                        }
+
+
+                        <!-- ==========================================
+                                PICKUP LOCATION
+                        =========================================== -->
+
+                        <div class="form-group">
+
+
+                            <label class="label">
+
+                                Pickup Location
+
+                                <span class="required">
+
+                                    *
+
+                                </span>
+
+                            </label>
+
+
+                            <select class="select"
+                                    name="PickupLocation"
+                                    required>
+
+
+                                <option value="">
+
+                                    Select Pickup Location
+
+                                </option>
+
+
+                                <option value="Obhur Housing">
+
+                                    Obhur Housing
+
+                                </option>
+
+
+                                <option value="Medical City Housing">
+
+                                    Medical City Housing
+
+                                </option>
+
+
+                                <option value="Jafali Housing">
+
+                                    Jafali Housing
+
+                                </option>
+
+
+                                <option value="Hospital Main Gate">
+
+                                    Hospital Main Gate
+
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- ==========================================
+                                DESTINATION
+                        =========================================== -->
+
+                        <div class="form-group">
+
+
+                            <label class="label">
+
+                                Destination
+
+                                <span class="required">
+
+                                    *
+
+                                </span>
+
+                            </label>
+
+
+                            <select class="select"
+                                    name="Destination"
+                                    required>
+
+
+                                <option value="">
+
+                                    Select Destination
+
+                                </option>
+
+
+                                <option value="Armed Forces Hospital">
+
+                                    Armed Forces Hospital
+
+                                </option>
+
+
+                                <option value="Medical City">
+
+                                    Medical City
+
+                                </option>
+
+
+                                <option value="Main Administration">
+
+                                    Main Administration
+
+                                </option>
+
+
+                                <option value="Specialized Clinic">
+
+                                    Specialized Clinic
+
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- ==========================================
+                                PICKUP TIME
+                        =========================================== -->
+
+                        <div class="form-group">
+
+
+                            <label class="label">
+
+                                Pickup Time
+
+                                <span class="required">
+
+                                    *
+
+                                </span>
+
+                            </label>
+
+
+                            <input type="time"
+                                   class="input"
+                                   name="PickupTime"
+                                   required>
+
+
+                        </div>
+
+
+
+                        <!-- ==========================================
+                                REASON
+                        =========================================== -->
+
+                        <div class="form-group">
+
+
+                            <label class="label">
+
+                                Reason
+
+                                <span class="required">
+
+                                    *
+
+                                </span>
+
+                            </label>
+
+
+                            <select class="select"
+                                    name="Reason"
+                                    required>
+
+
+                                <option value="">
+
+                                    Select Reason
+
+                                </option>
+
+
+                                <option value="Medical Emergency">
+
+                                    Medical Emergency
+
+                                </option>
+
+
+                                <option value="Patient Transfer">
+
+                                    Patient Transfer
+
+                                </option>
+
+
+                                <option value="Urgent Work Assignment">
+
+                                    Urgent Work Assignment
+
+                                </option>
+
+
+                                <option value="Equipment Delivery">
+
+                                    Equipment Delivery
+
+                                </option>
+
+
+                                <option value="Other">
+
+                                    Other
+
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- ==========================================
+                                ADDITIONAL NOTES
+                        =========================================== -->
+
+                        <div class="form-group full">
+
+
+                            <label class="label">
+
+                                Additional Notes
+
+                            </label>
+
+
+                            <textarea class="textarea"
+                                      name="Notes"
+                                      rows="5"
+                                      placeholder="Write any additional information here..."></textarea>
+
+
+                        </div>
+
+
+
+                        <!-- ==========================================
+                                SUBMIT BUTTON
+                        =========================================== -->
+
+                        <div class="form-group full">
+
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+
+                                Submit Request
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ==========================================
+                    HOSPITAL FOOTER
+=========================================== -->
+
+<footer class="app-footer">
+
+
+    <div class="container footer-inner">
+
+
+        <!-- INFORMATION -->
+
+        <div>
+
+
+            <h2 class="footer-title">
+
+                Armed Forces Hospital - Jeddah
+
+            </h2>
+
+
+            <p class="footer-text">
+
+                A sustainable healthy community for Ministry of Defense personnel and their families.
+
+            </p>
+
+
+            <h2 class="footer-title"
+                style="margin-top:15px;">
+
+                Our Mission
+
+            </h2>
+
+
+            <p class="footer-text">
+
+                Promoting healthy lifestyles and providing integrated preventive and curative healthcare services with professionalism and international quality standards.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- SYSTEM INFO -->
+
+        <div>
+
+
+            <h2 class="footer-title">
+
+                Transportation
+
+            </h2>
+
+
+            <ul class="footer-list">
+
+
+                <li>
+                    My Trips
+                </li>
+
+
+                <li>
+                    My Schedule
+                </li>
+
+
+                <li>
+                    Manage Trips
+                </li>
+
+
+                <li>
+                    Emergency Requests
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div>
+
+
+            <h2 class="footer-title">
+
+                Contact Us
+
+            </h2>
+
+
+            <ul class="footer-list">
+
+
+                <li>
+                    Saudi Arabia - Jeddah
+                </li>
+
+
+                <li>
+                    Corniche Road
+                </li>
+
+
+                <li>
+                    Al Andalus
+                </li>
+
+
+                <li>
+                    23311
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+
+        <div class="container">
+
+            © 2026 Armed Forces Hospital - Jeddah.
+            All Rights Reserved.
+
+        </div>
+
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- ==========================================
+                    JAVASCRIPT
+=========================================== -->
+
+<script>
+
+
+// ==========================================
+// PROFILE MENU
+// ==========================================
+
+const profileBtn =
+    document.getElementById("profileBtn");
+
+const profileMenu =
+    document.getElementById("profileMenu");
+
+
+if (profileBtn && profileMenu) {
+
+    profileBtn.addEventListener("click", function (e) {
+
+        e.stopPropagation();
+
+        profileMenu.classList.toggle("show");
+
+    });
+
+
+    document.addEventListener("click", function () {
+
+        profileMenu.classList.remove("show");
+
+    });
+
+}
+
+
+
+// ==========================================
+// LOCATION
+// ==========================================
+
+const locationBtn =
+    document.getElementById("locationBtn");
+
+const locationModal =
+    document.getElementById("locationModal");
+
+const saveLocation =
+    document.getElementById("saveLocation");
+
+const cancelLocation =
+    document.getElementById("cancelLocation");
+
+const locationSelect =
+    document.getElementById("locationSelect");
+
+
+
+if (locationBtn) {
+
+    locationBtn.addEventListener("click", function () {
+
+        locationModal.style.display = "flex";
+
+        profileMenu.classList.remove("show");
+
+    });
+
+}
+
+
+
+if (cancelLocation) {
+
+    cancelLocation.addEventListener("click", function () {
+
+        locationModal.style.display = "none";
+
+    });
+
+}
+
+
+
+if (saveLocation) {
+
+    saveLocation.addEventListener("click", function () {
+
+        locationModal.style.display = "none";
+
+    });
+
+}
+
+
+
+window.addEventListener("click", function (e) {
+
+    if (e.target === locationModal) {
+
+        locationModal.style.display = "none";
+
+    }
+
+});
+
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", function () {
+
+        window.location.href = "/Login/Index";
+
+    });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

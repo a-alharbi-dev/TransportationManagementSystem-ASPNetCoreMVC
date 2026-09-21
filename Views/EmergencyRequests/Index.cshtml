@@ -1,0 +1,1023 @@
+﻿
+@model IEnumerable<TransportationManagementSystem.Models.EmergencyRequest>
+
+@{
+    ViewData["Title"] = "Emergency Requests";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Emergency Requests | Transportation Management System
+    </title>
+
+    <link href="~/css/styleA.css"
+          rel="stylesheet" />
+
+    <style>
+
+        /* ==========================================
+                    ACTION BUTTONS
+        ========================================== */
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .action-buttons form {
+            display: inline-block;
+            margin: 0;
+        }
+
+        /* ==========================================
+                    APPROVED INFORMATION
+        ========================================== */
+
+        .approved-info {
+            line-height: 1.5;
+        }
+
+        .approved-info strong {
+            font-weight: 600;
+        }
+
+        .approved-info small {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* ==========================================
+                    MESSAGE BOX
+        ========================================== */
+
+        .message-box {
+            display: none;
+        }
+
+        /* ==========================================
+                    MODAL
+        ========================================== */
+
+        .modal {
+            display: none;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+                    HEADER
+========================================== -->
+
+<header class="app-header">
+
+    <!-- TOP HEADER -->
+
+    <div class="header-top">
+
+        <div class="container header-top-inner">
+
+            <span>
+                King Fahd Armed Forces Hospital in Jeddah
+            </span>
+
+            <span>
+                Transportation Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN HEADER -->
+
+    <div class="container header-main-inner">
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div>
+
+                <h1 class="brand-title">
+                    Movement Officer
+                </h1>
+
+                <p class="brand-subtitle">
+                    Transportation Services Platform
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="main-nav">
+
+            <a href="/Assignment/Index"
+               class="nav-link">
+
+                Trip Operation List
+
+            </a>
+
+
+            <a href="/EmergencyRequests/Index"
+               class="nav-link active">
+
+                Emergency Requests
+
+            </a>
+
+        </nav>
+
+
+        <!-- PROFILE -->
+
+        <div class="header-actions">
+
+            <div class="profile-dropdown">
+
+                <button class="manager-chip"
+                        id="profileBtn"
+                        type="button">
+
+                    <span>
+                        MO
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Movement Officer
+                        </strong>
+
+                    </div>
+
+                </button>
+
+
+                <div class="profile-menu"
+                     id="profileMenu">
+
+                    <button class="menu-item"
+                            id="logoutBtn"
+                            type="button">
+
+                        Sign Out
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+                    MAIN
+========================================== -->
+
+<main>
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="card">
+
+
+                <!-- ==========================================
+                            CARD HEADER
+                ========================================== -->
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2 class="card-title">
+                            Emergency Requests
+                        </h2>
+
+                        <p class="section-subtitle">
+                            Review and manage emergency transportation requests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                            CARD BODY
+                ========================================== -->
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Request ID
+                                    </th>
+
+                                    <th>
+                                        Employee ID
+                                    </th>
+
+                                    <th>
+                                        Pickup Location
+                                    </th>
+
+                                    <th>
+                                        Destination
+                                    </th>
+
+                                    <th>
+                                        Priority
+                                    </th>
+
+                                    <th>
+                                        Time
+                                    </th>
+
+                                    <th>
+                                        Reason
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Actions
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                @if (Model != null && Model.Any())
+                                {
+
+                                    @foreach (var request in Model)
+                                    {
+
+                                        <tr>
+
+
+                                            <!-- ==================================
+                                                        REQUEST ID
+                                            ================================== -->
+
+                                            <td>
+
+                                                ER-@request.RequestID
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        EMPLOYEE / USER ID
+                                            ================================== -->
+
+                                            <td>
+
+                                                @request.UserID
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        PICKUP
+                                            ================================== -->
+
+                                            <td>
+
+                                                @request.PickupLocation
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        DESTINATION
+                                            ================================== -->
+
+                                            <td>
+
+                                                @request.Destination
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        PRIORITY
+                                            ================================== -->
+
+                                            <td>
+
+                                                @request.Priority
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        TIME
+                                            ================================== -->
+
+                                            <td>
+
+                                                @request.RequestTime.ToString("hh:mm tt")
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        REASON
+                                            ================================== -->
+
+                                            <td>
+
+                                                @request.Reason
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        STATUS
+                                            ================================== -->
+
+                                            <td>
+
+                                                @if (request.Status == "Pending")
+                                                {
+
+                                                    <span class="badge badge-warning">
+
+                                                        Pending
+
+                                                    </span>
+
+                                                }
+                                                else if (request.Status == "Approved")
+                                                {
+
+                                                    <span class="badge badge-success">
+
+                                                        Approved
+
+                                                    </span>
+
+                                                }
+                                                else if (request.Status == "Rejected")
+                                                {
+
+                                                    <span class="badge badge-danger">
+
+                                                        Rejected
+
+                                                    </span>
+
+                                                }
+                                                else
+                                                {
+
+                                                    <span class="badge badge-info">
+
+                                                        @request.Status
+
+                                                    </span>
+
+                                                }
+
+                                            </td>
+
+
+                                            <!-- ==================================
+                                                        ACTIONS
+                                            ================================== -->
+
+                                            <td>
+
+                                                @if (request.Status == "Pending")
+                                                {
+
+                                                    <div class="action-buttons">
+
+
+                                                        <!-- APPROVE -->
+
+                                                        <button type="button"
+                                                                class="btn btn-primary approve-btn"
+                                                                onclick="openApprove(@request.RequestID)">
+
+                                                            Approve
+
+                                                        </button>
+
+
+                                                        <!-- REJECT -->
+
+                                                        <form asp-controller="EmergencyRequests"
+                                                              asp-action="Reject"
+                                                              method="post">
+
+                                                            @Html.AntiForgeryToken()
+
+                                                            <input type="hidden"
+                                                                   name="requestId"
+                                                                   value="@request.RequestID" />
+
+                                                            <button type="submit"
+                                                                    class="btn btn-danger">
+
+                                                                Reject
+
+                                                            </button>
+
+                                                        </form>
+
+
+                                                    </div>
+
+                                                }
+                                                else if (request.Status == "Approved")
+                                                {
+
+                                                    <div class="approved-info">
+
+
+                                                        <!-- VEHICLE -->
+
+                                                        @if (request.Vehicle != null)
+                                                        {
+
+                                                            <strong>
+
+                                                                @request.Vehicle.PlateNumber
+
+                                                            </strong>
+
+                                                            <br />
+
+                                                            <small>
+
+                                                                @request.Vehicle.VehicleType
+                                                                -
+                                                                @request.Vehicle.Model
+
+                                                            </small>
+
+                                                        }
+
+
+                                                        <br />
+
+
+                                                        <!-- DRIVER -->
+
+                                                        @if (request.Driver != null)
+                                                        {
+
+                                                            <strong>
+
+                                                                @request.Driver.FullName
+
+                                                            </strong>
+
+                                                        }
+
+                                                    </div>
+
+                                                }
+                                                else if (request.Status == "Rejected")
+                                                {
+
+                                                    <span>
+
+                                                        Request Rejected
+
+                                                    </span>
+
+                                                }
+
+                                            </td>
+
+
+                                        </tr>
+
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    <tr>
+
+                                        <td colspan="9"
+                                            style="text-align:center;">
+
+                                            No emergency requests found.
+
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ==========================================
+                    FOOTER
+========================================== -->
+
+<footer class="app-footer">
+
+    <div class="container footer-inner">
+
+
+        <!-- INFORMATION -->
+
+        <div>
+
+            <h2 class="footer-title">
+                Armed Forces Hospital - Jeddah
+            </h2>
+
+            <p class="footer-text">
+
+                A sustainable healthy community for Ministry of Defense
+                personnel and their families.
+
+            </p>
+
+
+            <h2 class="footer-title"
+                style="margin-top:15px;">
+
+                Our Mission
+
+            </h2>
+
+            <p class="footer-text">
+
+                Promoting healthy lifestyles and providing integrated
+                preventive and curative healthcare services with
+                professionalism and international quality standards.
+
+            </p>
+
+        </div>
+
+
+        <!-- SYSTEM INFO -->
+
+        <div>
+
+            <h2 class="footer-title">
+
+                Transportation
+
+            </h2>
+
+            <ul class="footer-list">
+
+                <li>
+                    Trip Operation List
+                </li>
+
+                <li>
+                    Emergency Requests
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div>
+
+            <h2 class="footer-title">
+
+                Contact Us
+
+            </h2>
+
+            <ul class="footer-list">
+
+                <li>
+                    Saudi Arabia - Jeddah
+                </li>
+
+                <li>
+                    Corniche Road
+                </li>
+
+                <li>
+                    Al Andalus
+                </li>
+
+                <li>
+                    23311
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            © 2026 Armed Forces Hospital - Jeddah.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================
+        APPROVE EMERGENCY MODAL
+========================================== -->
+
+<div class="modal"
+     id="approveModal">
+
+    <div class="modal-dialog">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="modal-header">
+
+            <h3 class="modal-title">
+
+                Assign Vehicle & Driver
+
+            </h3>
+
+
+            <button class="close-btn"
+                    type="button"
+                    onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <!-- ==========================================
+                    MODAL BODY
+        ========================================== -->
+
+        <div class="modal-body">
+
+            <form asp-controller="EmergencyRequests"
+                  asp-action="Approve"
+                  method="post"
+                  id="approveForm">
+
+                @Html.AntiForgeryToken()
+
+
+                <!-- REQUEST ID -->
+
+                <input type="hidden"
+                       id="selectedRequest"
+                       name="requestId" />
+
+
+                <div class="form-grid">
+
+
+                    <!-- ==================================
+                                VEHICLE
+                    ================================== -->
+
+                    <div class="form-group">
+
+                        <label class="label">
+
+                            Vehicle
+
+                        </label>
+
+
+                        <select class="select"
+                                id="vehicleSelect"
+                                name="vehicleId"
+                                required>
+
+                            <option value="">
+
+                                Select Vehicle
+
+                            </option>
+
+
+                            @if (ViewBag.Vehicles != null)
+                            {
+
+                                foreach (var vehicle in ViewBag.Vehicles)
+                                {
+
+                                    <option value="@vehicle.VehicleID">
+
+                                        @vehicle.PlateNumber
+                                        -
+                                        @vehicle.VehicleType
+                                        -
+                                        @vehicle.Model
+
+                                    </option>
+
+                                }
+
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ==================================
+                                DRIVER
+                    ================================== -->
+
+                    <div class="form-group">
+
+                        <label class="label">
+
+                            Driver
+
+                        </label>
+
+
+                        <select class="select"
+                                id="driverSelect"
+                                name="driverId"
+                                required>
+
+                            <option value="">
+
+                                Select Driver
+
+                            </option>
+
+
+                            @if (ViewBag.Drivers != null)
+                            {
+
+                                foreach (var driver in ViewBag.Drivers)
+                                {
+
+                                    <option value="@driver.DriverID">
+
+                                        @driver.FullName
+
+                                    </option>
+
+                                }
+
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ==================================
+                            MODAL FOOTER
+                ================================== -->
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            onclick="closeModal()">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        Approve Request
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+                    MESSAGE BOX
+========================================== -->
+
+<div id="messageBox"
+     class="message-box">
+
+</div>
+
+
+<script>
+
+
+// ==========================================
+// APPROVE MODAL
+// ==========================================
+
+function openApprove(requestId)
+{
+
+    document.getElementById("selectedRequest").value = requestId;
+
+    document
+        .getElementById("approveModal")
+        .classList.add("show");
+
+}
+
+
+// ==========================================
+// CLOSE MODAL
+// ==========================================
+
+function closeModal()
+{
+
+    document
+        .getElementById("approveModal")
+        .classList.remove("show");
+
+}
+
+
+// ==========================================
+// CLOSE MODAL WHEN CLICKING OUTSIDE
+// ==========================================
+
+window.onclick = function(event)
+{
+
+    const modal =
+        document.getElementById("approveModal");
+
+    if (event.target === modal)
+    {
+
+        modal.classList.remove("show");
+
+    }
+
+};
+
+
+// ==========================================
+// PROFILE MENU
+// ==========================================
+
+const profileBtn =
+    document.getElementById("profileBtn");
+
+const profileMenu =
+    document.getElementById("profileMenu");
+
+
+if (profileBtn && profileMenu)
+{
+
+    profileBtn.onclick = function(event)
+    {
+
+        event.stopPropagation();
+
+        profileMenu.classList.toggle("show");
+
+    };
+
+}
+
+
+// ==========================================
+// CLOSE PROFILE MENU
+// ==========================================
+
+document.addEventListener("click", function()
+{
+
+    if (profileMenu)
+    {
+
+        profileMenu.classList.remove("show");
+
+    }
+
+});
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+if (logoutBtn)
+{
+
+    logoutBtn.onclick = function()
+    {
+
+        window.location.href =
+            "/Login/Index";
+
+    };
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

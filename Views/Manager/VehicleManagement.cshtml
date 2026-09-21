@@ -1,0 +1,1562 @@
+﻿@model IEnumerable<TransportationManagementSystem.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Vehicle Management";
+}
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Vehicle Management | Transportation Management System
+    </title>
+
+    <link href="~/css/styleM.css"
+          rel="stylesheet" />
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+                    HEADER
+========================================== -->
+
+    <header class="app-header">
+
+
+        <!-- Top Header -->
+
+        <div class="header-top">
+
+            <div class="container header-top-inner">
+
+                <span>
+                    King Fahd Armed Forces Hospital in Jeddah
+                </span>
+
+                <span>
+                    Transportation Management System
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Main Header -->
+
+        <div class="container header-main-inner">
+
+
+            <!-- Brand -->
+
+            <div class="brand">
+
+ 
+
+
+                <div>
+
+                    <h1 class="brand-title">
+                        Transportation Management
+                    </h1>
+
+                    <p class="brand-subtitle">
+                        Transportation Services Platform
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Navigation -->
+
+            <nav class="main-nav">
+
+
+                <a href="/Trip/Index"
+                   class="nav-link">
+
+                    Trip Management
+
+                </a>
+
+
+                <a href="/Vehicle/Index"
+                   class="nav-link active">
+
+                    Vehicle Management
+
+                </a>
+
+
+                <a href="/Driver/Index"
+                   class="nav-link">
+
+                    Driver Management
+
+                </a>
+
+
+            </nav>
+
+
+
+            <!-- Header Actions -->
+
+            <div class="header-actions">
+
+                <div class="profile-dropdown">
+
+
+                    <button class="manager-chip"
+                            id="profileBtn">
+
+                        <span>M</span>
+
+                        <div>
+
+                            <strong>
+                                Abrar 
+                            </strong>
+
+                        </div>
+
+                    </button>
+
+
+
+                    <div class="profile-menu"
+                         id="profileMenu">
+
+
+                        <button class="menu-item"
+                                id="logoutBtn">
+
+                            Sign Out
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+                    MAIN
+========================================== -->
+
+    <main>
+
+
+        <section class="section">
+
+
+            <div class="container">
+
+
+                <div class="card">
+
+
+                    <!-- Card Header -->
+
+                    <div class="card-header">
+
+
+                        <div>
+
+                            <h2 class="card-title">
+                                Vehicle Management
+                            </h2>
+
+                            <p class="section-subtitle">
+                                Create and manage transportation vehicles.
+                            </p>
+
+                        </div>
+
+
+
+                        <button class="btn btn-primary"
+                                id="createVehicleBtn">
+
+                            + Create New Vehicle
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <!-- Card Body -->
+
+                    <div class="card-body">
+
+
+                        <div class="table-responsive">
+
+
+                            <table>
+
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Vehicle ID
+                                        </th>
+
+                                        <th>
+                                            Plate Number
+                                        </th>
+
+                                        <th>
+                                            Vehicle Type
+                                        </th>
+
+                                        <th>
+                                            Model
+                                        </th>
+
+                                        <th>
+                                            Capacity
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                        <th>
+                                            Actions
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+
+                                <tbody id="vehicleTableBody">
+
+
+                                    @foreach (var vehicle in Model)
+                                    {
+
+                                        <tr data-id="@vehicle.VehicleID">
+
+
+                                            <!-- Vehicle ID -->
+
+                                            <td>
+
+                                                <div class="data-title">
+
+                                                    VH-@vehicle.VehicleID.ToString("D3")
+
+                                                </div>
+
+                                            </td>
+
+
+
+                                            <!-- Plate Number -->
+
+                                            <td>
+
+                                                @vehicle.PlateNumber
+
+                                            </td>
+
+
+
+                                            <!-- Vehicle Type -->
+
+                                            <td>
+
+                                                @vehicle.VehicleType
+
+                                            </td>
+
+
+
+                                            <!-- Model -->
+
+                                            <td>
+
+                                                @vehicle.Model
+
+                                            </td>
+
+
+
+                                            <!-- Capacity -->
+
+                                            <td>
+
+                                                @vehicle.Capacity
+
+                                            </td>
+
+
+
+                                            <!-- Status -->
+
+                                            <td>
+
+                                                @vehicle.Status
+
+                                            </td>
+
+
+
+                                            <!-- Actions -->
+
+                                            <td>
+
+
+                                                <button class="btn btn-secondary edit-btn">
+
+                                                    Edit
+
+                                                </button>
+
+
+
+                                                <button class="btn btn-danger delete-btn">
+
+                                                    Delete
+
+                                                </button>
+
+
+                                            </td>
+
+
+                                        </tr>
+
+                                    }
+
+
+                                </tbody>
+
+
+                            </table>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+            CREATE / EDIT VEHICLE MODAL
+========================================== -->
+
+    <div class="modal"
+         id="vehicleModal">
+
+
+        <div class="modal-dialog">
+
+
+            <!-- Modal Header -->
+
+            <div class="modal-header">
+
+
+                <h3 class="modal-title"
+                    id="vehicleModalTitle">
+
+                    Create New Vehicle
+
+                </h3>
+
+
+
+                <button class="close-btn"
+                        id="closeVehicleModal">
+
+                    ×
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- Modal Body -->
+
+            <div class="modal-body">
+
+
+                <div class="form-grid">
+
+
+                    <!-- ==================================
+                        PLATE NUMBER
+                ================================== -->
+
+                    <div class="form-group">
+
+
+                        <label class="label">
+
+                            Plate Number
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+
+                        <input type="text"
+                               class="input"
+                               id="plateNumber"
+                               placeholder="Enter plate number">
+
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                        VEHICLE TYPE
+                ================================== -->
+
+                    <div class="form-group">
+
+
+                        <label class="label">
+
+                            Vehicle Type
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+
+                        <select class="select"
+                                id="vehicleType">
+
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+
+                            <option value="Bus">
+                                Bus
+                            </option>
+
+
+                            <option value="Van">
+                                Van
+                            </option>
+
+
+                            <option value="Car">
+                                Car
+                            </option>
+
+
+                            <option value="Mini Bus">
+                                Mini Bus
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                        MODEL
+                ================================== -->
+
+                    <div class="form-group">
+
+
+                        <label class="label">
+
+                            Model
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+
+                        <input type="text"
+                               class="input"
+                               id="vehicleModel"
+                               placeholder="Enter vehicle model">
+
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                        CAPACITY
+                ================================== -->
+
+                    <div class="form-group">
+
+
+                        <label class="label">
+
+                            Number of Seats
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+
+                        <input type="number"
+                               class="input"
+                               id="vehicleCapacity"
+                               placeholder="Enter seats"
+                               min="1">
+
+
+                    </div>
+
+
+
+                    <!-- ==================================
+                        STATUS
+                ================================== -->
+
+                    <div class="form-group full">
+
+
+                        <label class="label">
+
+                            Operational Status
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+
+                        <select class="select"
+                                id="vehicleStatus">
+
+
+                            <option value="">
+                                Select Status
+                            </option>
+
+
+                            <option value="Available">
+                                Available
+                            </option>
+
+
+                            <option value="In Service">
+                                In Service
+                            </option>
+
+
+                            <option value="Out of Service">
+                                Out of Service
+                            </option>
+
+
+                            <option value="Maintenance">
+                                Maintenance
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Modal Footer -->
+
+            <div class="modal-footer">
+
+
+                <button class="btn btn-primary"
+                        id="saveVehicleBtn">
+
+                    Save Vehicle
+
+                </button>
+
+
+
+                <button class="btn btn-secondary"
+                        id="cancelVehicleBtn">
+
+                    Cancel
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==========================================
+                    FOOTER
+========================================== -->
+
+    <footer class="app-footer">
+
+
+        <div class="container footer-inner">
+
+
+            <!-- Footer About -->
+
+            <div>
+
+
+                <h2 class="footer-title">
+
+                    Armed Forces Hospital - Jeddah
+
+                </h2>
+
+
+
+                <p class="footer-text">
+
+                    A sustainable healthy community for Ministry of Defense personnel and their families.
+
+                </p>
+
+
+
+                <h2 class="footer-title"
+                    style="margin-top:15px;">
+
+                    Our Mission
+
+                </h2>
+
+
+
+                <p class="footer-text">
+
+                    Promoting healthy lifestyles and providing integrated preventive and curative healthcare services with professionalism and international quality standards.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- Footer Transportation -->
+
+            <div>
+
+
+                <h2 class="footer-title">
+
+                    Transportation
+
+                </h2>
+
+
+
+                <ul class="footer-list">
+
+
+                    <li>
+                        Trip Management
+                    </li>
+
+
+                    <li>
+                        Vehicle Management
+                    </li>
+
+
+                    <li>
+                        Driver Management
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+
+
+            <!-- Footer Contact -->
+
+            <div>
+
+
+                <h2 class="footer-title">
+
+                    Contact Us
+
+                </h2>
+
+
+
+                <ul class="footer-list">
+
+
+                    <li>
+                        Saudi Arabia - Jeddah
+                    </li>
+
+
+                    <li>
+                        Corniche Road
+                    </li>
+
+
+                    <li>
+                        23311
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+
+            <div class="container">
+
+                © 2026 Armed Forces Hospital - Jeddah. All Rights Reserved.
+
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- ==========================================
+                MESSAGE BOX
+========================================== -->
+
+    <div id="messageBox"
+         class="message-box">
+    </div>
+
+
+
+    <!-- ==========================================
+                    JAVASCRIPT
+========================================== -->
+<script>
+
+// ==========================================
+// MESSAGE BOX
+// ==========================================
+
+function showMessage(message, type = "success") {
+
+    const box = document.getElementById("messageBox");
+
+    if (!box) return;
+
+    box.className = "message-box";
+
+    if (type === "error") {
+        box.classList.add("error");
+    }
+    else if (type === "warning") {
+        box.classList.add("warning");
+    }
+    else if (type === "info") {
+        box.classList.add("info");
+    }
+
+    box.innerHTML = message;
+
+    box.classList.add("show");
+
+    clearTimeout(box.timer);
+
+    box.timer = setTimeout(function () {
+
+        box.classList.remove("show");
+
+    }, 3000);
+}
+
+
+// ==========================================
+// PROFILE MENU
+// ==========================================
+
+const profileBtn =
+    document.getElementById("profileBtn");
+
+const profileMenu =
+    document.getElementById("profileMenu");
+
+if (profileBtn && profileMenu) {
+
+    profileBtn.addEventListener("click", function (e) {
+
+        e.stopPropagation();
+
+        profileMenu.classList.toggle("show");
+
+    });
+
+    document.addEventListener("click", function () {
+
+        profileMenu.classList.remove("show");
+
+    });
+}
+
+
+// ==========================================
+// VARIABLES
+// ==========================================
+
+const vehicleModal =
+    document.getElementById("vehicleModal");
+
+const createVehicleBtn =
+    document.getElementById("createVehicleBtn");
+
+const closeVehicleModal =
+    document.getElementById("closeVehicleModal");
+
+const cancelVehicleBtn =
+    document.getElementById("cancelVehicleBtn");
+
+const saveVehicleBtn =
+    document.getElementById("saveVehicleBtn");
+
+const vehicleModalTitle =
+    document.getElementById("vehicleModalTitle");
+
+const vehicleTableBody =
+    document.getElementById("vehicleTableBody");
+
+let editMode = false;
+
+let selectedRow = null;
+
+
+// ==========================================
+// OPEN CREATE VEHICLE
+// ==========================================
+
+if (createVehicleBtn) {
+
+    createVehicleBtn.addEventListener("click", function () {
+
+        editMode = false;
+
+        selectedRow = null;
+
+        vehicleModalTitle.innerText =
+            "Create New Vehicle";
+
+        saveVehicleBtn.innerText =
+            "Save Vehicle";
+
+
+        document.getElementById("plateNumber").value = "";
+
+        document.getElementById("vehicleType").value = "";
+
+        document.getElementById("vehicleModel").value = "";
+
+        document.getElementById("vehicleCapacity").value = "";
+
+        document.getElementById("vehicleStatus").value = "";
+
+
+        vehicleModal.classList.add("show");
+
+    });
+
+}
+
+
+// ==========================================
+// CLOSE MODAL
+// ==========================================
+
+if (closeVehicleModal) {
+
+    closeVehicleModal.addEventListener("click", function () {
+
+        vehicleModal.classList.remove("show");
+
+    });
+
+}
+
+
+if (cancelVehicleBtn) {
+
+    cancelVehicleBtn.addEventListener("click", function () {
+
+        vehicleModal.classList.remove("show");
+
+    });
+
+}
+
+
+window.addEventListener("click", function (e) {
+
+    if (e.target === vehicleModal) {
+
+        vehicleModal.classList.remove("show");
+
+    }
+
+});
+
+
+// ==========================================
+// SAVE VEHICLE
+// CREATE + UPDATE
+// ==========================================
+
+if (saveVehicleBtn) {
+
+    saveVehicleBtn.addEventListener("click", async function () {
+
+
+        // ==========================================
+        // GET FORM DATA
+        // ==========================================
+
+        const plateNumber =
+            document.getElementById("plateNumber")
+                .value.trim();
+
+        const vehicleType =
+            document.getElementById("vehicleType")
+                .value;
+
+        const model =
+            document.getElementById("vehicleModel")
+                .value.trim();
+
+        const capacity =
+            document.getElementById("vehicleCapacity")
+                .value;
+
+        const status =
+            document.getElementById("vehicleStatus")
+                .value;
+
+
+        // ==========================================
+        // VALIDATION
+        // ==========================================
+
+        if (
+            plateNumber === "" ||
+            vehicleType === "" ||
+            model === "" ||
+            capacity === "" ||
+            status === ""
+        ) {
+
+            showMessage(
+                "Please complete all required fields.",
+                "warning"
+            );
+
+            return;
+        }
+
+
+        if (parseInt(capacity) <= 0) {
+
+            showMessage(
+                "Number of seats must be greater than zero.",
+                "warning"
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // UPDATE VEHICLE
+        // ==========================================
+
+        if (editMode && selectedRow) {
+
+            const vehicleId =
+                selectedRow.getAttribute("data-id");
+
+
+            if (!vehicleId) {
+
+                showMessage(
+                    "Vehicle ID not found.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch("/Vehicle/Update", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            vehicleID:
+                                parseInt(vehicleId),
+
+                            plateNumber:
+                                plateNumber,
+
+                            vehicleType:
+                                vehicleType,
+
+                            model:
+                                model,
+
+                            capacity:
+                                parseInt(capacity),
+
+                            status:
+                                status
+
+                        })
+
+                    });
+
+
+                const result =
+                    await response.json();
+
+
+                if (!result.success) {
+
+                    showMessage(
+                        result.message ||
+                        "Unable to update vehicle.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                // ==========================================
+                // UPDATE TABLE ROW
+                // ==========================================
+
+                selectedRow.cells[1].innerText =
+                    plateNumber;
+
+                selectedRow.cells[2].innerText =
+                    vehicleType;
+
+                selectedRow.cells[3].innerText =
+                    model;
+
+                selectedRow.cells[4].innerText =
+                    capacity;
+
+                selectedRow.cells[5].innerText =
+                    status;
+
+
+                showMessage(
+                    "Vehicle updated successfully."
+                );
+
+
+                editMode = false;
+
+                selectedRow = null;
+
+                vehicleModal.classList.remove("show");
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                showMessage(
+                    "Unable to update vehicle.",
+                    "error"
+                );
+
+            }
+
+            return;
+        }
+
+
+        // ==========================================
+        // CREATE VEHICLE
+        // ==========================================
+
+        try {
+
+            const response =
+                await fetch("/Vehicle/Create", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
+                    },
+
+                    body:
+
+                        "plateNumber=" +
+                        encodeURIComponent(plateNumber) +
+
+                        "&vehicleType=" +
+                        encodeURIComponent(vehicleType) +
+
+                        "&model=" +
+                        encodeURIComponent(model) +
+
+                        "&capacity=" +
+                        encodeURIComponent(capacity) +
+
+                        "&status=" +
+                        encodeURIComponent(status)
+
+                });
+
+
+            const result =
+                await response.json();
+
+
+            if (!result.success) {
+
+                showMessage(
+                    result.message ||
+                    "Unable to create vehicle.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            // ==========================================
+            // ADD ROW
+            // ==========================================
+
+            const row =
+                document.createElement("tr");
+
+
+            row.setAttribute(
+                "data-id",
+                result.vehicleId
+            );
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="data-title">
+
+                        VH-${String(result.vehicleId)
+                            .padStart(3, "0")}
+
+                    </div>
+
+                </td>
+
+                <td>
+                    ${plateNumber}
+                </td>
+
+                <td>
+                    ${vehicleType}
+                </td>
+
+                <td>
+                    ${model}
+                </td>
+
+                <td>
+                    ${capacity}
+                </td>
+
+                <td>
+                    ${status}
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-secondary edit-btn">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger delete-btn">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            vehicleTableBody.appendChild(row);
+
+
+            showMessage(
+                "Vehicle created successfully."
+            );
+
+
+            // ==========================================
+            // RESET
+            // ==========================================
+
+            document.getElementById("plateNumber").value = "";
+
+            document.getElementById("vehicleType").value = "";
+
+            document.getElementById("vehicleModel").value = "";
+
+            document.getElementById("vehicleCapacity").value = "";
+
+            document.getElementById("vehicleStatus").value = "";
+
+
+            vehicleModal.classList.remove("show");
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                "Unable to create vehicle.",
+                "error"
+            );
+
+        }
+
+    });
+
+}
+
+
+// ==========================================
+// EDIT & DELETE
+// ==========================================
+
+document.addEventListener("click", async function (e) {
+
+
+    // ==========================================
+    // EDIT
+    // ==========================================
+
+    if (e.target.classList.contains("edit-btn")) {
+
+        selectedRow =
+            e.target.closest("tr");
+
+
+        if (!selectedRow) {
+            return;
+        }
+
+
+        const vehicleId =
+            selectedRow.getAttribute("data-id");
+
+
+        if (!vehicleId) {
+
+            showMessage(
+                "Vehicle ID not found.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        editMode = true;
+
+
+        vehicleModalTitle.innerText =
+            "Edit Vehicle";
+
+        saveVehicleBtn.innerText =
+            "Update Vehicle";
+
+
+        // ==========================================
+        // GET EXISTING DATA
+        // ==========================================
+
+        document.getElementById("plateNumber").value =
+            selectedRow.cells[1]
+                .innerText
+                .trim();
+
+
+        document.getElementById("vehicleType").value =
+            selectedRow.cells[2]
+                .innerText
+                .trim();
+
+
+        document.getElementById("vehicleModel").value =
+            selectedRow.cells[3]
+                .innerText
+                .trim();
+
+
+        document.getElementById("vehicleCapacity").value =
+            selectedRow.cells[4]
+                .innerText
+                .trim();
+
+
+        document.getElementById("vehicleStatus").value =
+            selectedRow.cells[5]
+                .innerText
+                .trim();
+
+
+        vehicleModal.classList.add("show");
+
+
+        return;
+    }
+
+
+    // ==========================================
+    // DELETE
+    // ==========================================
+
+    if (e.target.classList.contains("delete-btn")) {
+
+        const row =
+            e.target.closest("tr");
+
+
+        if (!row) {
+            return;
+        }
+
+
+        const vehicleId =
+            row.getAttribute("data-id");
+
+
+        if (!vehicleId) {
+
+            showMessage(
+                "Vehicle ID not found.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch("/Vehicle/Delete", {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
+
+                    },
+
+                    body:
+                        "id=" +
+                        encodeURIComponent(vehicleId)
+
+                });
+
+
+            const result =
+                await response.json();
+
+
+            if (!result.success) {
+
+                showMessage(
+                    result.message ||
+                    "Unable to delete vehicle.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            row.remove();
+
+
+            showMessage(
+                "Vehicle deleted successfully.",
+                "error"
+            );
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                "Unable to delete vehicle.",
+                "error"
+            );
+
+        }
+
+    }
+
+});
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function () {
+
+        window.location.href =
+            "/Login/Index";
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
