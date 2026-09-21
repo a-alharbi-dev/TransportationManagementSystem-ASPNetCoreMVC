@@ -102,7 +102,7 @@ The project follows the **Model-View-Controller (MVC)** architecture.
              -------- Entity Framework Core -------
                               |
                          SQL Server
--
+---
 
 Model
 
