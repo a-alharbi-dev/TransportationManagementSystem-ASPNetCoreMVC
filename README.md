@@ -90,7 +90,7 @@ This experience allowed me to expand my role from primarily frontend development
 
 The project follows the **Model-View-Controller (MVC)** architecture.
 
-`
+```text
                     Transportation Management System
                                |
              ---------------------------------------
